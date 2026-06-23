@@ -44,8 +44,15 @@
    ```
 4. deploy mlx-lm server
    
+   1. lm model (text)
     ``` bash
     mlx_lm.server
+    ```
+
+   2.  vlm model (multimodal)
+
+    ``` bash
+    mlx_vlm.server
     ```
 
 5. Start OpenCode and select the provider
