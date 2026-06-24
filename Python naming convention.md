@@ -1,11 +1,104 @@
+- [Python repo naming convention](#python-repo-naming-convention)
+  - [Key Naming Conventions](#key-naming-conventions)
+  - [Comparison Overview](#comparison-overview)
+  - [Best Practices](#best-practices)
+- [Python folder and files naming convention](#python-folder-and-files-naming-convention)
+  - [Key Naming Conventions](#key-naming-conventions-1)
+  - [Standard Project Structure Example](#standard-project-structure-example)
+  - [Critical Rules](#critical-rules)
 - [Python Class Naming Convention](#python-class-naming-convention)
   - [💡 Core Class Naming Rules](#-core-class-naming-rules)
   - [⚠️ Special Class Conventions](#️-special-class-conventions)
   - [🔍 Class Components vs. Class Names](#-class-components-vs-class-names)
-- [Python fFnction and Variable Naming Convention](#python-ffnction-and-variable-naming-convention)
+- [Python Function and Variable Naming Convention](#python-function-and-variable-naming-convention)
   - [💡 Core Rules for Functions and Variables](#-core-rules-for-functions-and-variables)
   - [⚠️ Special Naming Conventions](#️-special-naming-conventions)
   - [🔍 Quick Summary Table](#-quick-summary-table)
+    - [Another coding example](#another-coding-example)
+
+# Python repo naming convention
+The standard convention for naming a Python project repository is **lowercase with underscores** (`lowercase_with_underscores`) or **lowercase with hyphens** (`lowercase-with-hyphens`). [1, 2, 3] 
+While Git repositories widely accept various formats, aligning your repository name with your Python package name prevents confusion. [4] 
+## Key Naming Conventions
+
+* ***Repository Name (GitHub/GitLab)**: Use `lowercase-with-hyphens` (e.g., `requests-stream`) or `lowercase_with_underscores` (e.g., `requests_stream`). Hyphens are generally preferred for URL readability.
+* **Package/Module Name (Import name)**: Use lowercase_with_underscores strictly ([PEP 8](https://peps.python.org/pep-0008/)). Hyphens are illegal in Python import statements.
+* **Distribution Name (PyPI)**: Use `lowercase-with-hyphens` or `lowercase_with_underscores`. PyPI treats both as equivalent during installation (p`ip install my-package` matches `my_package`). [5, 6, 7, 8, 9] 
+
+## Comparison Overview
+
+| Target [10, 11, 12, 13, 14] | Convention | Example | Allowed Characters |
+|---|---|---|---|
+| Repository | Hyphens or Underscores | `data-processor` or `data_processor` | Alphanumeric, `-`, `_` |
+| PyPI Package | Hyphens or Underscores | `data-processor` | Alphanumeric, `-`, `_`, `.` |
+| Python Import | Underscores Only | `import data_processor` | Alphanumeric, `_` (No hyphens) |
+
+## Best Practices
+
+* Match Repo to Import: Name your repository with underscores if you want an exact 1:1 match with your local Python code imports.
+* Keep it Short: Choose concise, mnemonic names.
+* Avoid Prefixes: Do not prefix names with "python-" or "-py" unless necessary, as the ecosystem context is already implied. [15, 16] 
+
+
+[1] [https://techversantinfotech.com](https://techversantinfotech.com/python-naming-conventions-points-you-should-know/)
+[2] [https://forum.inductiveautomation.com](https://forum.inductiveautomation.com/t/ignition-project-development-style-guide/10425/8)
+[3] [https://medium.com](https://medium.com/@nur26691/repository-naming-conventions-1065467de776)
+[4] [https://unstop.com](https://unstop.com/blog/python-namespace)
+[5] [https://retailtechinnovationhub.com](https://retailtechinnovationhub.com/home/2024/2/29/the-ultimate-guide-to-structuring-a-python-package)
+[6] [https://dev.to](https://dev.to/thumbone/publishing-a-python-package-what-i-wish-the-maze-of-tutorials-covered-1838)
+[7] [https://commandlinux.com](https://commandlinux.com/how-to/python-54axhg5/)
+[8] [https://github.com](https://github.com/scottclowe/python-template-repo)
+[9] [https://dev.to](https://dev.to/thumbone/publishing-a-python-package-what-i-wish-the-maze-of-tutorials-covered-1838)
+[10] [https://python.plainenglish.io](https://python.plainenglish.io/how-to-organize-your-python-project-the-right-way-in-2025-c8671d873332)
+[11] [https://learn.microsoft.com](https://learn.microsoft.com/en-us/azure/devops/organizations/settings/naming-restrictions?view=azure-devops)
+[12] [https://packaging.python.org](https://packaging.python.org/tutorials/packaging-projects/)
+[13] [https://reza-ta.medium.com](https://reza-ta.medium.com/complete-guide-from-developing-a-python-package-to-registering-on-pypi-75063786c14e)
+[14] [https://techversantinfotech.com](https://techversantinfotech.com/python-naming-conventions-points-you-should-know/)
+[15] [https://labex.io](https://labex.io/tutorials/git-changing-the-name-of-your-github-repository-step-by-step-398328)
+[16] [https://medium.com](https://medium.com/@ashley.e.shultz/naming-company-python-packages-d1295fb9008d)
+
+# Python folder and files naming convention
+Python folder and file naming conventions strictly follow [PEP 8](https://peps.python.org/pep-0008/) guidelines. [1] 
+## Key Naming Conventions
+
+* **Packages (Folders with `__init__.py`)**: Short, all-lowercase names. Underscores are discouraged unless necessary for readability (e.g., `analytics` or `data_parser`).
+* **Modules (Files)**: All-lowercase names. Underscores can be used freely to improve readability (e.g., `file_reader.py`).
+* **Scripts (Executable Files)**: All-lowercase names with underscores if needed (e.g., `run_pipeline.py`).
+* **Tests**: Must start with `test_` for test discovery frameworks like `pytest` (e.g., `test_auth.py`). [2, 3, 4, 5, 6] 
+
+## Standard Project Structure Example
+Here is how these naming conventions look in a standard layout:
+
+```
+my-project-repo/               <-- Repo name (hyphens or underscores)
+├── .gitignore
+├── README.md
+├── pyproject.toml
+├── src/                       <-- Source directory (lowercase)
+│   └── my_package/            <-- Package folder (lowercase, underscores if needed)
+│       ├── __init__.py
+│       ├── core_logic.py      <-- Module file (lowercase_with_underscores)
+│       └── data_loader.py     <-- Module file
+└── tests/                     <-- Test folder (lowercase)
+    ├── test_core.py           <-- Test file (starts with test_)
+    └── test_loader.py         <-- Test file
+```
+
+## Critical Rules
+
+* **No Hyphens in Files/Folders**: Hyphens are illegal characters in Python imports. A file named `my-script.py` cannot be imported into another file.
+* **Avoid Mixed Case**: Do not use `CamelCase` for files or folders (e.g., avoid `DataLoader.py`).
+* **Don't Conflict with Built-ins**: Never name a file `sys.py`, `os.py`, `json.py`, or `math.py`, as this breaks standard library imports. [7, 8] 
+
+
+[1] [https://stackoverflow.com](https://stackoverflow.com/questions/52188866/python-project-structure-folder-naming-convention)
+[2] [https://softwareengineering.stackexchange.com](https://softwareengineering.stackexchange.com/questions/308972/python-file-naming-convention)
+[3] [https://www.reddit.com](https://www.reddit.com/r/learnpython/comments/ungwcm/the_standard_way_to_name_py_fileprojects/)
+[4] [https://www.reddit.com](https://www.reddit.com/r/learnpython/comments/5oxkfv/python_file_naming_standard/)
+[5] [https://softwareengineering.stackexchange.com](https://softwareengineering.stackexchange.com/questions/308972/python-file-naming-convention)
+[6] [https://www.reddit.com](https://www.reddit.com/r/learnpython/comments/5oxkfv/python_file_naming_standard/)
+[7] [https://dev.to](https://dev.to/cicirello/comment/1j0bl)
+[8] [https://discuss.ocaml.org](https://discuss.ocaml.org/t/module-files-module-names-and-capitalization/1025)
 
 
 # Python Class Naming Convention
@@ -86,7 +179,7 @@ Do not confuse class names with the components written inside them. According to
 [18] [https://inventwithpython.com](https://inventwithpython.com/beyond/chapter15.html)
 
 
-# Python fFnction and Variable Naming Convention
+# Python Function and Variable Naming Convention
 
 According to PEP 8, both functions and variables must follow the **snake_case convention**. This means they should be entirely lowercase, with words separated by underscores. [1, 2, 3]
 
@@ -99,7 +192,8 @@ According to PEP 8, both functions and variables must follow the **snake_case co
 ``` python
 # 🟢 Correct (snake_case)
 
-user_age = 25def calculate_total_price(price, tax):
+user_age = 25
+def calculate_total_price(price, tax):
     return price + tax
 
 # 🔴 Incorrect
@@ -149,6 +243,21 @@ def filter_by_class(class_="Premium"):
 | **Functions** | snake_case | `def send_email():` |
 | **Constants** | ALL_CAPS | `DATABASE_URL = "..."` |
 | **Protected** | _leading_underscore | `_secret_key = "123" `|
+
+### Another coding example
+
+``` python
+# ConstantMAX_ITEMS = 100
+class ShoppingCart:  # PascalCase for Classes
+    def __init__(self):
+        self._items = []  # Single underscore for internal/private use
+        self.total_price = 0.0  # snake_case for instance variables
+
+    def add_item(self, item_name, price):  # snake_case for functions/methods
+        if len(self._items) < MAX_ITEMS:
+            self._items.append(item_name)
+            self.total_price += price
+```
 
 [1] [https://discuss.python.org](https://discuss.python.org/t/why-in-pep-8-was-decided-both-vars-and-functions-to-be-snake-case/103376)
 [2] [https://www.uniccm.com](https://www.uniccm.com/coding/variable)
